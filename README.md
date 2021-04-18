@@ -17,6 +17,8 @@ $ git clone https://github.com/Kiranum/fund-manager-service.git
 $ cd fund-manager-service
 $ mvn clean verify
 ```
+At this point you may want to import the project into your IDE. IntelliJ is recommended.
+
 5. Start the service
     - #### via Maven
     ```
@@ -31,5 +33,6 @@ $ mvn clean verify
     - #### in your IDE
         Simply launch Main.java from within the IDE.
 
-6. Point your browser to http://localhost:8080/actuator/health
+6. Point your browser to http://localhost:8080/actuator/health. You should see a response acknowledging that the service 
+is up.
 
