@@ -3,10 +3,12 @@
 ## Prerequisites
 1. Maven 3.6.3
 2. Java 11
+3. IntelliJ
+   - Lombok and Sonarlint plugins
 
 ## Project setup   
 1. Install MySQL. Set up root user with password `root1234`.
-2. Login to MySQL and create a database `fund-manager`.
+2. Login to MySQL and create a database `fundmanager`.
 3. Clone the project
 ```
 $ cd $PROJECT_HOME
@@ -17,7 +19,7 @@ $ git clone https://github.com/Kiranum/fund-manager-service.git
 $ cd fund-manager-service
 $ mvn clean verify
 ```
-At this point you may want to import the project into your IDE. IntelliJ is recommended.
+At this point you may want to import the project into your IntelliJ. 
 
 5. Start the service
     - #### via Maven
