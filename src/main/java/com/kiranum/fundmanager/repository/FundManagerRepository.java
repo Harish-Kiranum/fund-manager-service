@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 @Repository
 public class FundManagerRepository {
 
@@ -28,4 +29,14 @@ public class FundManagerRepository {
                 .findFirst()
                 .orElse(null);
     }
+
+    public List<FundManager> getFundManagers(){
+        String query="select fm.id as id ," +
+                "fm.name as name from fund_manager fm";
+
+        return jdbcTemplate
+                .query(query, mapper.resultSet());
+    }
+
+
 }
