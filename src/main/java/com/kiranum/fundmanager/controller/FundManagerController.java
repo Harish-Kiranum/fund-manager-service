@@ -8,11 +8,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 @RestController
 public class FundManagerController {
 
     @Autowired
     private FundManagerService fundManagerService;
+
+    @GetMapping("/fund-managers")
+    public ResponseEntity<List<FundManager>> getFundManagers() {
+        return ResponseEntity.ok(fundManagerService.getFundManagers());
+    }
 
     @GetMapping("/fund-managers/{fundManagerId}")
     public ResponseEntity<FundManager> getById(@PathVariable Integer fundManagerId) {
