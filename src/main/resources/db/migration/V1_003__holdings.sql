@@ -1,3 +1,5 @@
+update fund_product set currency_cd = 'USD';
+
 INSERT INTO holding (fund_product_id, weight, company, ticker, cusip, market_price, num_shares, market_value, as_of_date) VALUES (1, 10.95, 'TESLA INC', 'TSLA', '88160R101', null, 3574518, 2570042696.82, '2021-04-21');
 INSERT INTO holding (fund_product_id, weight, company, ticker, cusip, market_price, num_shares, market_value, as_of_date) VALUES (1, 6.22, 'TELADOC HEALTH INC', 'TDOC', '87918A105', null, 8069783, 1459904442.53, '2021-04-21');
 INSERT INTO holding (fund_product_id, weight, company, ticker, cusip, market_price, num_shares, market_value, as_of_date) VALUES (1, 6.18, 'SQUARE INC - A', 'SQ', '852234103', null, 5907652, 1450328566.00, '2021-04-21');
