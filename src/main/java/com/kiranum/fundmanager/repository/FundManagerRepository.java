@@ -13,7 +13,10 @@ public class FundManagerRepository {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private FundManagerMapper mapper;
+    private FundManagerMapper managerMapper;
+
+    @Autowired
+    private FundManagerDetailMapper fundManagerDetailMapper;
 
     public FundManager getById(Integer fundManagerId) {
         String query = "select " +
@@ -24,7 +27,7 @@ public class FundManagerRepository {
                 "where fm.id = ? order by fundGroups_name";
 
         return jdbcTemplate
-                .query(query, mapper.resultSetExtractor(), fundManagerId)
+                .query(query, fundManagerDetailMapper.resultSetExtractor(), fundManagerId)
                 .stream()
                 .findFirst()
                 .orElse(null);
@@ -35,7 +38,7 @@ public class FundManagerRepository {
                 "fm.name as name from fund_manager fm";
 
         return jdbcTemplate
-                .query(query, mapper.resultSet());
+                .query(query, managerMapper.resultSetExtractor());
     }
 
 

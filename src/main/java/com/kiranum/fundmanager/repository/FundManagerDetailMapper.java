@@ -8,14 +8,16 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class FundManagerMapper {
+public class FundManagerDetailMapper {
 
     private final ResultSetExtractor<List<FundManager>> resultSetExtractor = JdbcTemplateMapperFactory
             .newInstance()
-            .addKeys("id")
+            .addKeys("id").addKeys("fundGroups_id")
+            .unorderedJoin()
             .newResultSetExtractor(FundManager.class);
 
     public ResultSetExtractor<List<FundManager>> resultSetExtractor() {
         return resultSetExtractor;
     }
+
 }
