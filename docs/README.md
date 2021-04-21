@@ -1,1 +1,1 @@
-Open the datamodel.mwb file in MySQL Workbench 8.0
+To open the datamodel.mwb file MySQL Workbench 8.0 is required.
