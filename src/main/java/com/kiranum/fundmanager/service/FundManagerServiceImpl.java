@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class FundManagerServiceImpl implements FundManagerService {
 
     @Autowired
-    private FundManagerRepository fundManagerRepository;
+    private FundManagerRepository repository;
 
     @Override
     public FundManager getById(Integer fundManagerId) {
-        return fundManagerRepository.getById(fundManagerId);
+        return repository.getById(fundManagerId);
     }
 
 }

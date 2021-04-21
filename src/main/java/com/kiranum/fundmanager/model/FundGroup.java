@@ -5,9 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class FundManagerGroup {
+public class FundGroup {
     private Integer id;
     private String name;
     private String description;
-
 }
