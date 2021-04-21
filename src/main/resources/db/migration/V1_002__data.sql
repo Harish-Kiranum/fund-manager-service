@@ -1,36 +1,14 @@
-CREATE TABLE fund_manager (
-	id INT NOT NULL,
-	name VARCHAR(100),
-	PRIMARY KEY(id)
-);
 
-CREATE TABLE fund_group (
-	id INT NOT NULL,
-	name VARCHAR(100),
-	description VARCHAR(200),
-	fund_manager_id INT NOT NULL,
-	PRIMARY KEY(id),
-	FOREIGN KEY(fund_manager_id) REFERENCES fund_manager(id)
-);
-
-CREATE TABLE fund_product (
-	id INT NOT NULL,
-	name VARCHAR(100),
-	description VARCHAR(1200),
-	fund_group_id INT NOT NULL,
-	PRIMARY KEY(id),
-	FOREIGN KEY(fund_group_id) REFERENCES fund_group(id)
-);
-
-
--- To Insert into `fund-manager` Record
+-- To Insert into fund-manager Record
 
 INSERT INTO fund_manager(
 	id,
+	mnemonic,
 	name
 )
  VALUES(
  	1,
+ 	'ARK',
 	'ARK FUNDS'
 );
 
@@ -44,7 +22,7 @@ INSERT INTO fund_group(
 )
  VALUES(
  	1,
- 	'ARK`s Active ETFs',
+ 	'ARK''s Active ETFs',
 	'Actively Managed Innovation ETFs',
 	1
 );
@@ -57,7 +35,7 @@ INSERT INTO fund_group(
 )
  VALUES(
  	2,
- 	'ARK`s Index ETFs',
+ 	'ARK''s Index ETFs',
 	'Indexed Innovation ETFs',
 	1
 );

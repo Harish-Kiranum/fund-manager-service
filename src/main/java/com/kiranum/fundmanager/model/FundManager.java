@@ -8,7 +8,7 @@ import java.util.List;
 @Getter
 @Setter
 public class FundManager {
-    private Integer id;
+    private Long id;
     private String name;
     private List<FundGroup> fundGroups;
 }
