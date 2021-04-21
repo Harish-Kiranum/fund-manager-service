@@ -25,7 +25,7 @@ CREATE TABLE fund_product (
 );
 
 CREATE TABLE fund_detail (
-	id BIGINT PRIMARY KEY,
+	fund_product_id BIGINT PRIMARY KEY,
     ticker VARCHAR(20),
     fund_type VARCHAR(40),
     cusip VARCHAR(20),
@@ -42,11 +42,11 @@ CREATE TABLE fund_detail (
     portfolio_mgr VARCHAR(50),
     as_of_date date,
     last_updated timestamp default current_timestamp,
-    CONSTRAINT fk_fund_detail_id FOREIGN KEY (id) REFERENCES fund_product(id)
+    CONSTRAINT fk_fund_detail_fund_product_id FOREIGN KEY (fund_product_id) REFERENCES fund_product(id)
 );
 
 CREATE TABLE nav_market_price (
-	id BIGINT PRIMARY KEY,
+	fund_product_id BIGINT PRIMARY KEY,
     nav DECIMAL(20, 2),
     market_price DECIMAL(20, 2),
     nav_change VARCHAR(100),
@@ -55,41 +55,45 @@ CREATE TABLE nav_market_price (
     trade_volume BIGINT,
     as_of_date date,
     last_updated timestamp default current_timestamp,
-    CONSTRAINT fk_nav_market_price_id FOREIGN KEY (id) REFERENCES fund_product(id)
+    CONSTRAINT fk_nav_market_price_fund_product_id FOREIGN KEY (fund_product_id) REFERENCES fund_product(id)
 );
 
 CREATE TABLE arkk_performance (
-	id BIGINT PRIMARY KEY,
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	fund_product_id BIGINT NOT NULL,
     nav DECIMAL(5, 2),
     market_price DECIMAL(5, 2),
     period VARCHAR(50),
     as_of_date date,
     last_updated timestamp default current_timestamp,
-    CONSTRAINT fk_arkk_performance_id FOREIGN KEY (id) REFERENCES fund_product(id)
+    CONSTRAINT fk_arkk_performance_fund_product_id FOREIGN KEY (fund_product_id) REFERENCES fund_product(id)
 );
 
 CREATE TABLE holding (
-	id BIGINT PRIMARY KEY,
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	fund_product_id BIGINT NOT NULL,
     weight DECIMAL(5, 2),
     company VARCHAR(100),
     ticker VARCHAR(20),
+    cusip VARCHAR(20),
     market_price DECIMAL(20, 2),
     num_shares BIGINT,
     market_value DECIMAL(20, 2),
     as_of_date date,
     last_updated timestamp default current_timestamp,
-    CONSTRAINT fk_holding_id FOREIGN KEY (id) REFERENCES fund_product(id)
+    CONSTRAINT fk_holding_fund_product_id FOREIGN KEY (fund_product_id) REFERENCES fund_product(id)
 );
 
 CREATE TABLE document (
-    id BIGINT PRIMARY KEY,
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    fund_product_id BIGINT NOT NULL,
     type VARCHAR(20),
     name VARCHAR(100),
     data_source VARCHAR(20),
     url VARCHAR(200),
     as_of_date DATE,
     last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_document_id FOREIGN KEY (id)
+    CONSTRAINT fk_document_fund_product_id FOREIGN KEY (fund_product_id)
         REFERENCES fund_product (id)
 );
 
