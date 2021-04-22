@@ -18,19 +18,24 @@ CREATE TABLE fund_group
 
 CREATE TABLE fund_product
 (
-    id                      BIGINT NOT NULL,
-    name                    VARCHAR(100),
-    description             VARCHAR(1200),
-    currency_cd             VARCHAR(10),
-    prev_total_market_value DECIMAL(20, 2),
-    fund_group_id           BIGINT NOT NULL,
+    id                          BIGINT NOT NULL,
+    name                        VARCHAR(100),
+    description                 VARCHAR(1200),
+    currency_cd                 VARCHAR(10),
+    fund_detail_refresh_dt      DATE,
+    nav_market_price_refresh_dt DATE,
+    arkk_performance_refresh_dt DATE,
+    holdings_refresh_dt         DATE,
+    prev_total_market_value     DECIMAL(20, 2),
+    fund_group_id               BIGINT NOT NULL,
     PRIMARY KEY (id),
     CONSTRAINT fk_fund_product_fund_group_id FOREIGN KEY (fund_group_id) REFERENCES fund_group (id)
 );
 
 CREATE TABLE fund_detail
 (
-    fund_product_id         BIGINT PRIMARY KEY,
+    id                      BIGINT PRIMARY KEY AUTO_INCREMENT,
+    fund_product_id         BIGINT,
     ticker                  VARCHAR(20),
     fund_type               VARCHAR(40),
     cusip                   VARCHAR(20),
@@ -45,21 +50,22 @@ CREATE TABLE fund_detail
     weighted_avg_market_cap DECIMAL(20, 2),
     median_market_cap       DECIMAL(20, 2),
     portfolio_mgr           VARCHAR(50),
-    as_of_date              date,
+    refresh_dt              date,
     last_updated            timestamp default current_timestamp,
     CONSTRAINT fk_fund_detail_fund_product_id FOREIGN KEY (fund_product_id) REFERENCES fund_product (id)
 );
 
 CREATE TABLE nav_market_price
 (
-    fund_product_id     BIGINT PRIMARY KEY,
+    id                  BIGINT PRIMARY KEY AUTO_INCREMENT,
+    fund_product_id     BIGINT,
     nav                 DECIMAL(20, 2),
     market_price        DECIMAL(20, 2),
     nav_change          VARCHAR(100),
     market_price_change VARCHAR(100),
     median_bid_ask      DECIMAL(5, 2),
     trade_volume        BIGINT,
-    as_of_date          date,
+    refresh_dt          date,
     last_updated        timestamp default current_timestamp,
     CONSTRAINT fk_nav_market_price_fund_product_id FOREIGN KEY (fund_product_id) REFERENCES fund_product (id)
 );
@@ -71,7 +77,7 @@ CREATE TABLE arkk_performance
     nav             DECIMAL(5, 2),
     market_price    DECIMAL(5, 2),
     period VARCHAR (50),
-    as_of_date      date,
+    refresh_dt      date,
     last_updated    timestamp default current_timestamp,
     CONSTRAINT fk_arkk_performance_fund_product_id FOREIGN KEY (fund_product_id) REFERENCES fund_product (id)
 );
@@ -87,7 +93,7 @@ CREATE TABLE holding
     market_price    DECIMAL(20, 2),
     num_shares      BIGINT,
     market_value    DECIMAL(20, 2),
-    as_of_date      date,
+    refresh_dt      date,
     last_updated    timestamp default current_timestamp,
     CONSTRAINT fk_holding_fund_product_id FOREIGN KEY (fund_product_id) REFERENCES fund_product (id)
 );
@@ -100,7 +106,6 @@ CREATE TABLE document
     name            VARCHAR(100),
     data_source     VARCHAR(20),
     url             VARCHAR(200),
-    as_of_date      DATE,
     last_updated    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_document_fund_product_id FOREIGN KEY (fund_product_id)
         REFERENCES fund_product (id)
