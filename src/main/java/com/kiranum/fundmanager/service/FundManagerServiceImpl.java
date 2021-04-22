@@ -2,6 +2,7 @@ package com.kiranum.fundmanager.service;
 
 import java.util.List;
 
+import com.kiranum.fundmanager.model.FundGroup;
 import com.kiranum.fundmanager.model.FundManager;
 import com.kiranum.fundmanager.repository.FundManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,11 @@ public class FundManagerServiceImpl implements FundManagerService {
     @Override
     public List<FundManager> getFundManagers(){
         return repository.getFundManagers();
+    }
+
+    @Override
+    public FundGroup getProductsById(Integer fundManagerId,Integer fundGroupId){
+        return repository.getProductsById(fundManagerId,fundGroupId);
     }
 
 }
